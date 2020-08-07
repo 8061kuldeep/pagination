@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <h1 class="text-center"><%=text%></h1>
+    <table class="table">
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Address</th>
+        <th>Mob_no</th>
+      </tr>
+      <%if(record.length>0){record.forEach(function(row){ %>
+
+      <tr>
+        <td><%=row.name%></td>
+        <td><%=row.email%></td>
+        <td><%=row.address%></td>
+        <td><%=row.mob_no%></td>
+      </tr>
+      <% })}%>
+    </table>
+    <nav aria-label="Page navigation example">
+      <% if (pages > 0) { %>
+      <ul class="pagination">
+        <% if (current == 1) { %>
+        <li class="disabled page-item"><a class="page-link">First</a></li>
+        <% } else { %>
+        <li class="page-item"><a class="page-link" href="/get/1">First</a></li>
+        <% } %> <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %> <%
+        if (i !== 1) { %>
+        <li class="disabled page-item"><a class="page-link">...</a></li>
+        <% } %> <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %> <%
+        if (i == current) { %>
+        <li class="active page-item"><a class="page-link"><%= i %></a></li>
+        <% } else { %>
+        <li class="page-item">
+          <a class="page-link" href="/get/<%= i %>"><%= i %></a>
+        </li>
+        <% } %> <% if (i == Number(current) + 4 && i < pages) { %>
+        <li class="disabled page-item"><a class="page-link">...</a></li>
+        <% } %> <% } %> <% if (current == pages) { %>
+        <li class="disabled page-item"><a class="page-link">Last</a></li>
+        <% } else { %>
+        <li class="page-item">
+          <a class="page-link" href="/get/<%= pages %>">Last</a>
+        </li>
+        <% } %>
+      </ul>
+      <% } %>
+    </nav>
+  </body>
+</html>
